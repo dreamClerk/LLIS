@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "deploy": "npx @cloudflare/next-on-pages",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
+    "pages:watch": "npx @cloudflare/next-on-pages --watch",
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/workers-types": "^4.20250426.0",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "1.2.2",
@@ -60,6 +64,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
+    "vercel": "^41.6.2",
     "zod": "^3.24.1"
   },
   "devDependencies": {

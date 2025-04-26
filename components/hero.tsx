@@ -131,12 +131,14 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative"
           >
-            <div className="relative w-full h-[550px]">
+            <div className="relative w-full h-[450px] md:h-[550px]">
               <div className="absolute inset-0 bg-white border-2 border-black rounded-2xl overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[400px]">
+                  {/* Hand-drawn doodle visualization */}
                   <div className="relative">
+                    {/* Central hub */}
                     <motion.div
                       animate={{
                         scale: [1, 1.05, 1],
@@ -145,16 +147,227 @@ export default function Hero() {
                       transition={{
                         duration: 8,
                         ease: "easeInOut",
-                        repeat: Infinity,
+                        repeat: Number.POSITIVE_INFINITY,
                       }}
-                      className="w-40 h-40 mx-auto bg-white border-2 border-black rounded-full flex items-center justify-center"
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white border-2 border-black rounded-full"
                     >
-                      <span className="text-4xl">🎓</span>
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 160 160"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0"
+                      >
+                        <path
+                          d="M80 40C93.3333 53.3333 106.667 53.3333 120 40"
+                          stroke="#10B84A"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M40 80C53.3333 93.3333 53.3333 106.667 40 120"
+                          stroke="#8B5CF6"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M120 120C106.667 106.667 106.667 93.3333 120 80"
+                          stroke="#EC4899"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M80 120C66.6667 106.667 53.3333 106.667 40 120"
+                          stroke="#10B84A"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <circle
+                          cx="80"
+                          cy="80"
+                          r="30"
+                          stroke="#8B5CF6"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeDasharray="5 5"
+                        />
+                      </svg>
                     </motion.div>
+
+                    {/* Orbiting elements */}
+                    {[...Array(5)].map((_, i) => {
+                      const angle = (i / 5) * Math.PI * 2
+                      const radius = 150
+                      const x = Math.cos(angle) * radius
+                      const y = Math.sin(angle) * radius
+                      const size = 20 + Math.random() * 30
+
+                      return (
+                        <motion.div
+                          key={i}
+                          className="absolute top-1/2 left-1/2 rounded-full bg-white border-2 border-black"
+                          style={{
+                            width: size,
+                            height: size,
+                            marginLeft: -size / 2,
+                            marginTop: -size / 2,
+                          }}
+                          animate={{
+                            x: [x, x * 0.9, x],
+                            y: [y, y * 1.1, y],
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{
+                            duration: 3 + i,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                            delay: i * 0.2,
+                          }}
+                        >
+                          {/* Doodle inside circle */}
+                          <svg
+                            width="100%"
+                            height="100%"
+                            viewBox="0 0 40 40"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            {i % 5 === 0 && (
+                              <path
+                                d="M20 10L23 17H30L24 22L27 30L20 25L13 30L16 22L10 17H17L20 10Z"
+                                stroke="#10B84A"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                            {i % 5 === 1 && (
+                              <path
+                                d="M10 10H30V30H10V10Z"
+                                stroke="#8B5CF6"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                            {i % 5 === 2 && (
+                              <circle
+                                cx="20"
+                                cy="20"
+                                r="10"
+                                stroke="#EC4899"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                            {i % 5 === 3 && (
+                              <path
+                                d="M10 20C10 15 15 10 20 10C25 10 30 15 30 20C30 25 25 30 20 30C15 30 10 25 10 20Z"
+                                stroke="#10B84A"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                            {i % 5 === 4 && (
+                              <path
+                                d="M10 15L20 10L30 15L20 20L10 15ZM10 25L20 20L30 25L20 30L10 25Z"
+                                stroke="#8B5CF6"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            )}
+                          </svg>
+                        </motion.div>
+                      )
+                    })}
+
+                    {/* Connection lines */}
+                    <svg className="absolute top-0 left-0 w-full h-full" viewBox="-200 -200 400 400">
+                      <motion.g
+                        animate={{ rotate: [0, 360] }}
+                        transition={{ duration: 100, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                      >
+                        {[...Array(20)].map((_, i) => {
+                          const startAngle = (i / 20) * Math.PI * 2
+                          const endAngle = ((i + 10) / 20) * Math.PI * 2
+                          const startRadius = 30 + Math.random() * 20
+                          const endRadius = 120 + Math.random() * 30
+                          const startX = Math.cos(startAngle) * startRadius
+                          const startY = Math.sin(startAngle) * startRadius
+                          const endX = Math.cos(endAngle) * endRadius
+                          const endY = Math.sin(endAngle) * endRadius
+
+                          // Alternate between the three main colors
+                          const colors = ["#10B84A", "#8B5CF6", "#EC4899"]
+                          const colorIndex = i % 3
+
+                          return (
+                            <motion.path
+                              key={i}
+                              d={`M ${startX} ${startY} L ${endX} ${endY}`}
+                              stroke={colors[colorIndex]}
+                              strokeWidth="1"
+                              strokeDasharray="4 4"
+                              initial={{ pathLength: 0, opacity: 0 }}
+                              animate={{
+                                pathLength: 1,
+                                opacity: [0, 0.8, 0],
+                              }}
+                              transition={{
+                                duration: 3 + (i % 3),
+                                repeat: Number.POSITIVE_INFINITY,
+                                ease: "easeInOut",
+                                delay: i * 0.1,
+                              }}
+                            />
+                          )
+                        })}
+                      </motion.g>
+                    </svg>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Floating cards */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="absolute -right-10 top-20 bg-white border-2 border-black p-4 rounded-lg max-w-[200px]"
+            >
+              <div className="flex items-center mb-2">
+                <div className="w-3 h-3 rounded-full bg-black mr-2"></div>
+                <span className="text-sm font-semibold">Student Insight</span>
+              </div>
+              <p className="text-xs text-gray-700">
+                "The campus events are amazing! Made so many connections this semester."
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="absolute -left-10 bottom-20 bg-white border-2 border-black p-4 rounded-lg max-w-[200px]"
+            >
+              <div className="flex items-center mb-2">
+                <div className="w-3 h-3 rounded-full bg-black mr-2"></div>
+                <span className="text-sm font-semibold">AI Analysis</span>
+              </div>
+              <p className="text-xs text-gray-700">
+                "87% of students report positive experiences with campus networking events."
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
