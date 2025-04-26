@@ -4,12 +4,16 @@ workers_dev = true
 
 [site]
 bucket = ".vercel/output/static"
-entry-point = ".vercel/output/functions/middleware"
+entry-point = "."
 
 [build]
-command = "npm run build"
+command = "npm install && npm run build"
 watch_dir = "build/worker"
+pages_build_output_dir = ".vercel/output/static"
 
 [build.upload]
 format = "modules"
-main = "./worker.mjs" 
+main = "./worker.mjs"
+
+[build.environment]
+NODE_VERSION = "18.20.8" 
