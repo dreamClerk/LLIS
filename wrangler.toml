@@ -3,13 +3,13 @@ name = "dlls-app"
 workers_dev = true
 
 [site]
-bucket = ".vercel/output/static"
+bucket = ".next"
 entry-point = "."
 
 [build]
 command = "npm install && npm run build"
 watch_dir = "build/worker"
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = ".next"
 
 [build.upload]
 format = "modules"
